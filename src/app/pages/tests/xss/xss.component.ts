@@ -20,7 +20,6 @@ export class XssComponent implements OnInit {
   constructor(
     private feedbackService: FeedbackService,
     private authService: AuthService,
-    private sanitizer: DomSanitizer,
     private formBuilder: FormBuilder
   ) {}
 
@@ -32,7 +31,7 @@ export class XssComponent implements OnInit {
 
   initForm() {
     this.feedbackForm = this.formBuilder.group({
-      name: ['', Validators.required],
+      username: ['', Validators.required],
       message: ['', Validators.required]
     });
   }
@@ -42,8 +41,8 @@ export class XssComponent implements OnInit {
     if (this.isLoggedIn) {
       this.authService.getLoggedInUser().subscribe(user => {
         if (user) {
-          this.feedbackForm.patchValue({ name: user.username });
-          this.feedbackForm.get('name')?.disable({emitEvent: false});
+          this.feedbackForm.patchValue({ username: user.username });
+          this.feedbackForm.get('username')?.disable({emitEvent: false});
         }
       });
     }
@@ -54,8 +53,9 @@ export class XssComponent implements OnInit {
       return;
     }
 
-    const { name, message } = this.feedbackForm.value;
-    this.feedbackService.submitFeedback(name, message).subscribe(() => {
+    const { username, message } = this.feedbackForm.getRawValue();
+    console.log(this.feedbackForm.getRawValue())
+    this.feedbackService.submitFeedback(username, message).subscribe(() => {
       this.feedbackForm.patchValue({ message: '' });
       this.loadFeedback();
     });
@@ -64,8 +64,8 @@ export class XssComponent implements OnInit {
   loadFeedback() {
     this.feedbackService.getAllFeedback().subscribe(data => {
       this.feedbackList = data.map(fb => ({
-        name: fb.username,
-        message: this.sanitizer.bypassSecurityTrustHtml(fb.message)
+        username: fb.username,
+        message: fb.message
       }));
     });
   }

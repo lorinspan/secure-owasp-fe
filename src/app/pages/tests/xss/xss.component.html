@@ -3,14 +3,14 @@
 
   <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()" class="feedback-form">
     <div class="input-group">
-      <label for="name">Your Name</label>
+      <label for="username">Your Name</label>
       <input
         type="text"
-        id="name"
-        formControlName="name"
+        id="username"
+        formControlName="username"
         required
       >
-      <div *ngIf="feedbackForm.get('name')?.invalid && feedbackForm.get('name')?.touched" class="error-message">
+      <div *ngIf="feedbackForm.get('username')?.invalid && feedbackForm.get('username')?.touched" class="error-message">
         Name is required.
       </div>
     </div>
@@ -32,8 +32,8 @@
   <h3>Public Feedback</h3>
   <div class="feedback-list">
     <div class="feedback-item" *ngFor="let feedback of feedbackList">
-      <strong class="feedback-name">{{ feedback.name }}</strong>
-      <p class="feedback-message" [innerHTML]="feedback.message"></p>
+      <strong class="feedback-name">{{ feedback.username }}</strong>
+      <p class="feedback-message">{{ feedback.message }}</p>
     </div>
   </div>
 </div>
