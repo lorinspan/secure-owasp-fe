@@ -5,7 +5,7 @@ WORKDIR /app
 # Copiaza doar fisierele necesare pentru instalarea dependentelor
 COPY package.json package-lock.json ./
 
-# Instaleaza dependentele (evita probleme de compatibilitate)
+# Instaleaza dependentele
 RUN npm install
 
 # Copiaza restul codului sursa
