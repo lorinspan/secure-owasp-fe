@@ -5,71 +5,68 @@
   <div class="grid-container">
     <div class="section">
       <h3 class="section-title">Broken Access Control</h3>
-      <p class="section-content">Testăm problemele de control al accesului care permit utilizatorilor neautorizați să acceseze resurse restricționate.</p>
+      <p class="section-content">Am implementat mecanisme stricte de control al accesului pentru a preveni accesul neautorizat la resurse.</p>
       <ul class="list">
-        <li>Escaladarea privilegiilor – Un utilizator obișnuit poate obține acces administrativ.</li>
-        <li>Acces neautorizat la conturi (IDOR) – Posibilitatea de a accesa contul altui utilizator prin schimbarea unui ID.</li>
-        <li>Lipsa restricțiilor pe acțiuni importante – Permite ștergerea sau modificarea datelor altor utilizatori.</li>
+        <li>Restricții de acces bazate pe roluri (RBAC) implementate în backend.</li>
+        <li>Protecție împotriva IDOR prin validarea accesului utilizatorului la resursele solicitate.</li>
+        <li>Restricții stricte pe acțiunile privilegiate (modificare, ștergere) în backend.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Cross-Site Scripting (XSS)</h3>
-      <p class="section-content">Explorăm atacurile XSS, unde input-ul nesigur este injectat în pagină pentru a executa scripturi malițioase.</p>
+      <p class="section-content">Am securizat aplicația împotriva atacurilor XSS prin filtrarea și validarea input-urilor utilizatorilor.</p>
       <ul class="list">
-        <li>Stored XSS – Codul malițios este salvat permanent în baza de date.</li>
-        <li>Reflected XSS – Atacatorul introduce cod malițios printr-o solicitare HTTP.</li>
-        <li>DOM-based XSS – Manipularea nesigură a DOM-ului permite rularea de cod JavaScript injectat.</li>
+        <li>Filtrarea input-ului prin sanitizare înainte de a fi afișat în pagină.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Broken Authentication</h3>
-      <p class="section-content">Demonstrează problemele legate de autentificare care pot permite atacatorilor să compromită conturi utilizator.</p>
+      <p class="section-content">Am implementat măsuri pentru a asigura autentificarea securizată a utilizatorilor.</p>
       <ul class="list">
-        <li>Parole slabe – Permite atacuri brute-force.</li>
-        <li>Stocarea sesiunii în client-side nesecurizat.</li>
-        <li>Lipsa rate limiting la login.</li>
+        <li>Politici stricte de parole (minim 7 caractere, obligatoriu cifre, litere mari, mici și caractere speciale).</li>
+        <li>Stocarea sesiunii în backend și utilizarea JWT cu expirare controlată.</li>
+        <li>Limitarea numărului de încercări de login și implementarea rate limiting.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Cryptographic Failures + CSRF</h3>
-      <p class="section-content">Demonstrează problemele legate de criptografie care pot duce la expunerea datelor sensibile.</p>
+      <p class="section-content">Am eliminat utilizarea algoritmilor de hashing slabi și am implementat protecție CSRF.</p>
       <ul class="list">
-        <li>Utilizarea algoritmului MD5 – Vulnerabil la atacuri rainbow table.</li>
-        <li>Hardcoding de chei criptografice – Un atacator poate extrage cheia.</li>
-        <li>Atac CSRF prin schimbarea adresei de e-mail.</li>
+        <li>Utilizarea `bcrypt` pentru hash-ul parolelor, eliminând algoritmi nesiguri precum MD5.</li>
+        <li>Evitat hardcoding-ul de chei criptografice, folosind variabile de mediu pentru gestionarea lor.</li>
+        <li>Protecție CSRF prin utilizarea token-urilor anti-CSRF.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Server-Side Request Forgery (SSRF)</h3>
-      <p class="section-content">Explorăm atacurile SSRF, unde utilizatorul poate introduce o adresă URL nesigură.</p>
+      <p class="section-content">Am limitat accesul cererilor către server pentru a preveni atacurile SSRF.</p>
       <ul class="list">
-        <li>Manipularea cererilor către backend.</li>
-        <li>Acces la resurse interne.</li>
-        <li>Expunerea informațiilor sensibile.</li>
+        <li>Validarea URL-urilor înainte de a permite accesul serverului la resurse externe.</li>
+        <li>Blocarea accesului către IP-uri private și localhost pentru a preveni atacuri interne.</li>
+        <li>Utilizarea `allowlist` pentru a restricționa solicitările către surse de încredere.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Path Traversal</h3>
-      <p class="section-content">Explorăm atacul Path Traversal, unde un atacator poate accesa fișiere interne ale serverului.</p>
+      <p class="section-content">Am protejat accesul la fișiere pentru a preveni atacurile de tip Path Traversal.</p>
       <ul class="list">
-        <li>Citirea fișierelor sensibile.</li>
-        <li>Exploatarea fără protecție.</li>
-        <li>Accesarea fișierelor interne.</li>
+        <li>Restricționarea accesului la fișierele sensibile prin validarea și normalizarea căii fișierelor.</li>
+        <li>Limitarea accesului utilizatorului doar la directoarele permise.</li>
       </ul>
     </div>
 
     <div class="section">
       <h3 class="section-title">Remote Code Execution (RCE)</h3>
-      <p class="section-content">Explorăm atacurile RCE, unde un atacator poate executa comenzi pe server.</p>
+      <p class="section-content">Am securizat serverul pentru a preveni execuția de comenzi arbitrare.</p>
       <ul class="list">
-        <li>Executarea comenzilor la distanță.</li>
-        <li>Injecție de comenzi.</li>
-        <li>Escaladarea privilegiilor.</li>
+        <li>Filtrarea și validarea input-ului pentru a preveni injecția de comenzi.</li>
+        <li>Utilizarea de `exec` și `shell_exec` doar în condiții strict controlate.</li>
+        <li>Izolarea aplicației în containere Docker pentru a limita impactul unui atac RCE.</li>
       </ul>
     </div>
   </div>
