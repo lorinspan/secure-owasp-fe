@@ -112,6 +112,12 @@ input:focus, select:focus {
   background-color: #E74C3C;
 }
 
+.delete-btn:disabled {
+  background: #bdc3c7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
 .delete-btn:hover {
   background-color: #C0392B;
 }

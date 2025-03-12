@@ -103,7 +103,12 @@
 
         <div class="admin-actions">
           <button (click)="updateUser(user)" class="btn admin-update-btn">Update</button>
-          <button (click)="deleteUser(user.id)" class="btn delete-btn">Delete</button>
+          <button
+            (click)="deleteUser(user.id)"
+            class="btn delete-btn"
+            [disabled]="user.id === loggedInUser?.id">
+            Delete
+          </button>
         </div>
       </div>
     </div>
