@@ -1,0 +1,111 @@
+<div class="auth-container">
+  <h2 *ngIf="!isLoggedIn">Login</h2>
+  <h2 *ngIf="isLoggedIn">Welcome, {{ loggedInUser?.username }}!</h2>
+
+  <form *ngIf="!isLoggedIn" (submit)="onLogin()" class="login-form">
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" [(ngModel)]="username" required>
+    </div>
+
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" [(ngModel)]="password" required>
+    </div>
+
+    <button type="submit" class="btn primary-btn">Login</button>
+  </form>
+
+  <p *ngIf="authMessage" class="error-message">{{ authMessage }}</p>
+
+  <div *ngIf="isLoggedIn" class="dashboard">
+    <div class="user-info">
+      <p><strong>User ID:</strong> {{ loggedInUser?.id }}</p>
+      <p><strong>Role:</strong> {{ loggedInUser?.role }}</p>
+    </div>
+
+    <div class="btn-group">
+      <button (click)="logout()" class="btn logout-btn">Logout</button>
+      <button *ngIf="isAdmin()" (click)="loadAdminPanel()" class="btn admin-btn">Access Admin Panel</button>
+    </div>
+
+    <div *ngIf="adminPanelAccess" class="admin-panel">
+      <h3>Admin Panel</h3>
+      <p><strong>ALLOWED ORIGINS:</strong> {{ adminInfo?.ALLOWED_ORIGINS }}</p>
+      <p><strong>DATABASE URL:</strong> {{ adminInfo?.DB_URL }}</p>
+      <p><strong>DATABASE USERNAME:</strong> {{ adminInfo?.DB_USERNAME }}</p>
+      <p><strong>JWT SECRET:</strong> {{ adminInfo?.JWT_SECRET }}</p>
+    </div>
+
+    <h3>{{ isAdmin() ? "Manage Users" : "Manage User" }}</h3>
+
+    <div *ngIf="!isAdmin()" class="user-card">
+      <div class="input-group">
+        <label>Username</label>
+        <input name="user-username" [(ngModel)]="loggedInUser!.username">
+      </div>
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" name="user-email" [(ngModel)]="loggedInUser!.email">
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" name="user-password" [(ngModel)]="newPassword">
+      </div>
+
+      <div class="input-group">
+        <label>Role</label>
+        <select name="user-role" [(ngModel)]="loggedInUser!.role"
+                [disabled]="!isAdmin() || loggedInUser!.username === loggedInUser!.username">
+          <option value="USER">User</option>
+          <option value="ADMIN">Admin</option>
+        </select>
+      </div>
+
+      <div class="user-actions">
+        <button (click)="updateLoggedUser()" class="btn update-btn">Update</button>
+      </div>
+    </div>
+
+    <div class="user-list" *ngIf="isAdmin()">
+      <div class="user-card" *ngFor="let user of users">
+        <div class="input-group">
+          <label>Id</label>
+          <input name="user-id" disabled [(ngModel)]="user.id">
+        </div>
+
+        <div class="input-group">
+          <label>Username</label>
+          <input name="user-username" [(ngModel)]="user.username">
+        </div>
+
+        <div class="input-group">
+          <label>Password</label>
+          <input type="password" name="user-password" [(ngModel)]="user.password"
+                 placeholder="••••••">
+        </div>
+
+        <div class="input-group">
+          <label>Email</label>
+          <input type="email" name="user-email" [(ngModel)]="user.email">
+        </div>
+
+        <div class="input-group">
+          <label>Role</label>
+          <select name="user-role" [(ngModel)]="user.role"
+                  [disabled]="user.username === loggedInUser!.username">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+        </div>
+
+        <div class="admin-actions">
+          <button (click)="updateUser(user)" class="btn admin-update-btn">Update</button>
+          <button (click)="deleteUser(user.id)" class="btn delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

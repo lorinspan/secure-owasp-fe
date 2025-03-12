@@ -1,0 +1,213 @@
+.container {
+  max-width: 650px;
+  margin: 50px auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: fadeIn 0.8s ease-in-out;
+  word-wrap: break-word;
+}
+
+h2 {
+  font-size: 26px;
+  color: #3498DB;
+  font-weight: bold;
+  margin-bottom: 15%;
+}
+
+.input-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  min-width: 300px;
+  max-width: 450px;
+  padding: 12px;
+  border: 2px solid #3498DB;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+}
+
+input:focus {
+  border-color: #2980B9;
+  outline: none;
+  box-shadow: 0 0 6px rgba(52, 152, 219, 0.5);
+}
+
+.btn {
+  background: #3498DB;
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  max-width: 350px;
+  margin-top: 5%;
+}
+
+.btn:hover {
+  background: #2980B9;
+  transform: scale(1.05);
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.secondary-btn {
+  background-color: #2ECC71;
+}
+
+.secondary-btn:hover {
+  background-color: #27AE60;
+}
+
+.logout-btn {
+  background-color: #E74C3C;
+}
+
+.logout-btn:hover {
+  background-color: #C0392B;
+}
+
+.logout {
+  display: flex;
+  justify-content: center;
+}
+
+.user-info {
+  margin-top: 20px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-left: 5px solid #3498DB;
+  border-radius: 8px;
+  text-align: left;
+}
+
+h2 {
+  margin-top: 5%;
+}
+
+label {
+  margin-top: 10%;
+}
+
+button {
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+.modal {
+  position: absolute;
+  bottom: 2.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: red;
+  color: yellow;
+  padding: 25px;
+  font-size: 22px;
+  font-weight: bold;
+  border: 5px solid yellow;
+  text-align: center;
+  border-radius: 10px;
+  animation: flash 0.2s infinite alternate, shake 0.2s infinite alternate, bounce 2s infinite alternate;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+}
+
+.modal h2 {
+  font-size: 28px;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: yellow;
+  text-shadow: 2px 2px 5px red;
+  animation: flash-text 0.3s infinite alternate;
+}
+
+.modal p {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px black;
+  animation: flash-text 0.3s infinite alternate-reverse;
+}
+
+.claim-btn {
+  margin-top: 5%;
+  background: yellow;
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 15px;
+  border: 5px solid red;
+  animation: pulse 0.5s infinite alternate;
+}
+
+.claim-btn:hover {
+  background: white;
+  color: black;
+  transform: scale(1.1);
+}
+
+@keyframes flash {
+  from { background: red; color: yellow; }
+  to { background: yellow; color: red; }
+}
+
+@keyframes flash-text {
+  from { color: white; }
+  to { color: yellow; }
+}
+
+@keyframes shake {
+  from { transform: translate(-50%, -5px); }
+  to { transform: translate(-50%, 5px); }
+}
+
+@keyframes bounce {
+  from { transform: translate(-50%, 10px); }
+  to { transform: translate(-50%, -10px); }
+}
+
+@keyframes pulse {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close-btn {
+  background: none;
+  padding: 0;
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+}
+
+.close-btn:hover {
+  color: red;
+}

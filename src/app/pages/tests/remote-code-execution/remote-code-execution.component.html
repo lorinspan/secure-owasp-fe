@@ -1,0 +1,16 @@
+<div class="container">
+  <h2>Executare Comandă</h2>
+  <p>Introduceți o comandă pentru a o executa:</p>
+
+  <input type="text" [(ngModel)]="command" placeholder="Ex: ls -la">
+  <button (click)="executeCommand()" class="btn primary-btn">Execută</button>
+
+  <div *ngIf="response">
+    <h3>Rezultatul comenzii:</h3>
+    <pre class="command-output">{{ response }}</pre>
+  </div>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>
+
+

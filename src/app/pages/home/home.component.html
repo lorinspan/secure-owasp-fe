@@ -1,0 +1,76 @@
+<div class="container">
+  <h1 class="title">OWASP Security Checker Application</h1>
+  <p class="subtitle">Examen Cybersecurity Developer, Șpan Lorin, martie 2025.</p>
+
+  <div class="grid-container">
+    <div class="section">
+      <h3 class="section-title">Broken Access Control</h3>
+      <p class="section-content">Testăm problemele de control al accesului care permit utilizatorilor neautorizați să acceseze resurse restricționate.</p>
+      <ul class="list">
+        <li>Escaladarea privilegiilor – Un utilizator obișnuit poate obține acces administrativ.</li>
+        <li>Acces neautorizat la conturi (IDOR) – Posibilitatea de a accesa contul altui utilizator prin schimbarea unui ID.</li>
+        <li>Lipsa restricțiilor pe acțiuni importante – Permite ștergerea sau modificarea datelor altor utilizatori.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Cross-Site Scripting (XSS)</h3>
+      <p class="section-content">Explorăm atacurile XSS, unde input-ul nesigur este injectat în pagină pentru a executa scripturi malițioase.</p>
+      <ul class="list">
+        <li>Stored XSS – Codul malițios este salvat permanent în baza de date.</li>
+        <li>Reflected XSS – Atacatorul introduce cod malițios printr-o solicitare HTTP.</li>
+        <li>DOM-based XSS – Manipularea nesigură a DOM-ului permite rularea de cod JavaScript injectat.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Broken Authentication</h3>
+      <p class="section-content">Demonstrează problemele legate de autentificare care pot permite atacatorilor să compromită conturi utilizator.</p>
+      <ul class="list">
+        <li>Parole slabe – Permite atacuri brute-force.</li>
+        <li>Stocarea sesiunii în client-side nesecurizat.</li>
+        <li>Lipsa rate limiting la login.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Cryptographic Failures + CSRF</h3>
+      <p class="section-content">Demonstrează problemele legate de criptografie care pot duce la expunerea datelor sensibile.</p>
+      <ul class="list">
+        <li>Utilizarea algoritmului MD5 – Vulnerabil la atacuri rainbow table.</li>
+        <li>Hardcoding de chei criptografice – Un atacator poate extrage cheia.</li>
+        <li>Atac CSRF prin schimbarea adresei de e-mail.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Server-Side Request Forgery (SSRF)</h3>
+      <p class="section-content">Explorăm atacurile SSRF, unde utilizatorul poate introduce o adresă URL nesigură.</p>
+      <ul class="list">
+        <li>Manipularea cererilor către backend.</li>
+        <li>Acces la resurse interne.</li>
+        <li>Expunerea informațiilor sensibile.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Path Traversal</h3>
+      <p class="section-content">Explorăm atacul Path Traversal, unde un atacator poate accesa fișiere interne ale serverului.</p>
+      <ul class="list">
+        <li>Citirea fișierelor sensibile.</li>
+        <li>Exploatarea fără protecție.</li>
+        <li>Accesarea fișierelor interne.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h3 class="section-title">Remote Code Execution (RCE)</h3>
+      <p class="section-content">Explorăm atacurile RCE, unde un atacator poate executa comenzi pe server.</p>
+      <ul class="list">
+        <li>Executarea comenzilor la distanță.</li>
+        <li>Injecție de comenzi.</li>
+        <li>Escaladarea privilegiilor.</li>
+      </ul>
+    </div>
+  </div>
+</div>

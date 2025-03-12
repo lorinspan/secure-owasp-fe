@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Store Stock Checker</h2>
+  <p>Enter a store URL to check stock availability:</p>
+
+  <div class="input-group">
+    <input type="text" [(ngModel)]="url" placeholder="e.g. https://www.emag.ro/" class="input-field">
+    <button (click)="checkStock()" class="check-btn">Check Stock</button>
+  </div>
+
+  <div *ngIf="response.message || response.error" class="result-box">
+    <h3>Stock Result:</h3>
+    <p *ngIf="response.message">{{ response.message }}</p>
+    <p *ngIf="response.error" class="error-message">{{ response.error }}</p>
+  </div>
+</div>

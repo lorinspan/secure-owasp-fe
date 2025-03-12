@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>Citește fișierul</h2>
+  <p>Introduceți numele fișierului pentru a vizualiza conținutul:</p>
+
+  <input type="text" [(ngModel)]="filePath" placeholder="Ex: briosa">
+  <button (click)="readFile()" class="btn primary-btn">Citește Fișier</button>
+
+  <div *ngIf="availableFiles.length">
+    <h3>Fișiere disponibile:</h3>
+    <ul class="file-list">
+      <li *ngFor="let file of availableFiles" (click)="selectFile(file)">
+        {{ file }}
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="response">
+    <h3>Conținutul fișierului:</h3>
+    <pre class="file-content">{{ response }}</pre>
+  </div>
+
+  <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+</div>
