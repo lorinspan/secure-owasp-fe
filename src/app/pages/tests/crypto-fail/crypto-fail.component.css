@@ -166,6 +166,12 @@ button {
   transform: scale(1.1);
 }
 
+.submit-btn:disabled {
+  background: #bdc3c7 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
 @keyframes flash {
   from { background: red; color: yellow; }
   to { background: yellow; color: red; }

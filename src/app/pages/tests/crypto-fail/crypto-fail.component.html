@@ -9,31 +9,31 @@
 
   <form *ngIf="activeTab === 'register' && !isLoggedIn" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="auth-form">
 
-    <p *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.dirty" class="error-message">
-      Username must be at least 5 characters long.
-    </p>
     <div class="input-group">
       <label for="username">Username</label>
       <input type="text" id="username" formControlName="username">
     </div>
-
-    <p *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.dirty" class="error-message">
-      Password must be at least 7 characters long and contain at least one: uppercase letter, lowercase letter, number and special character.
+    <p *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
+      Username must be at least 5 characters long.
     </p>
+
     <div class="input-group">
       <label for="password">Password</label>
       <input type="password" id="password" formControlName="password">
     </div>
-
-    <p *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.dirty" class="error-message">
-      Please enter a valid email address.
+    <p *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+      Password must be at least 7 characters long and contain at least one: uppercase letter, lowercase letter, number and special character.
     </p>
+
     <div class="input-group">
       <label for="email">Email</label>
       <input type="email" id="email" formControlName="email">
     </div>
+    <p *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+      Please enter a valid email address.
+    </p>
 
-    <button type="submit" class="btn primary-btn" [disabled]="registerForm.invalid">Register</button>
+    <button type="submit" class="btn primary-btn submit-btn" [disabled]="registerForm.invalid">Register</button>
   </form>
 
   <form *ngIf="activeTab === 'login' && !isLoggedIn" (ngSubmit)="onLogin()" class="auth-form">
@@ -63,11 +63,11 @@
       <div class="input-group">
         <label for="new-email">New Email</label>
         <input type="email" id="new-email" formControlName="newEmail">
-        <p *ngIf="changeEmailForm.get('newEmail')?.invalid && changeEmailForm.get('newEmail')?.dirty" class="error-message">
+        <p *ngIf="changeEmailForm.get('newEmail')?.invalid && changeEmailForm.get('newEmail')?.touched" class="error-message">
           Please enter a valid email address.
         </p>
       </div>
-      <button type="submit" class="btn secondary-btn" [disabled]="changeEmailForm.invalid">Change Email</button>
+      <button type="submit" class="btn secondary-btn submit-btn" [disabled]="changeEmailForm.invalid">Change Email</button>
     </form>
     <div class="logout">
       <button *ngIf="isLoggedIn" (click)="logout()" class="btn logout-btn">Logout</button>
