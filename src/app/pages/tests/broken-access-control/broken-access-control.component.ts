@@ -95,23 +95,28 @@ export class BrokenAccessControlComponent implements OnInit {
   async updateLoggedUser() {
     if (!this.loggedInUser) return;
 
+    const updatePayload: Partial<User> = {
+      username: this.loggedInUser.username,
+      email: this.loggedInUser.email,
+      role: this.loggedInUser.role
+    };
+
     if (this.newPassword.trim().length > 0) {
-      this.loggedInUser.password = this.newPassword;
+      updatePayload.password = this.newPassword;
     }
 
     try {
-      const response = await firstValueFrom(this.authService.updateSelf(this.loggedInUser));
+      const response = await firstValueFrom(this.authService.updateSelf(updatePayload));
       console.log("User updated successfully:", response);
-      console.log("Profile updated successfully!");
 
       if (response.token) {
         this.authService.updateToken(response.token);
       }
     } catch (error) {
       console.error("Update failed:", error);
-      console.log("Update failed! Please try again.");
     }
   }
+
 
   logout() {
     this.authService.logout();

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of, tap } from 'rxjs';
+import {Observable, catchError, of, tap, throwError} from 'rxjs';
 import { AuthService } from './auth.service';
 import {API_URL} from './utils/service-utils';
 
@@ -15,7 +15,7 @@ export class FeedbackService {
   submitFeedback(username: string, message: string): Observable<any> {
     if (!message.trim()) {
       console.warn("Feedback cannot be empty!");
-      return of({ error: "Feedback cannot be empty!" });
+      return throwError(() => new Error("Feedback cannot be empty!"));
     }
 
     const payload = { username, message };
@@ -29,7 +29,7 @@ export class FeedbackService {
       tap(() => console.log("Feedback submitted successfully!")),
       catchError(error => {
         console.error("Error submitting feedback:", error);
-        return of({ error: "Failed to submit feedback. You may need to log in." });
+        return throwError(() => error);
       })
     );
   }

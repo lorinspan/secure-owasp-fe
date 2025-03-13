@@ -16,6 +16,7 @@ export class XssComponent implements OnInit {
   feedbackForm!: FormGroup;
   feedbackList: any[] = [];
   isLoggedIn: boolean = false;
+  authMessage: string = '';
 
   constructor(
     private feedbackService: FeedbackService,
@@ -49,17 +50,29 @@ export class XssComponent implements OnInit {
   }
 
   submitFeedback() {
+    this.authMessage = '';
+
     if (this.feedbackForm.invalid) {
       return;
     }
 
     const { username, message } = this.feedbackForm.getRawValue();
-    console.log(this.feedbackForm.getRawValue())
-    this.feedbackService.submitFeedback(username, message).subscribe(() => {
-      this.feedbackForm.patchValue({ message: '' });
-      this.loadFeedback();
+
+    this.feedbackService.submitFeedback(username, message).subscribe({
+      next: () => {
+        this.feedbackForm.patchValue({ message: '' });
+        this.loadFeedback();
+      },
+      error: (error) => {
+        if (error.status === 400) {
+          this.authMessage = error.error || "An unexpected error occurred.";
+        } else {
+          console.error("Unhandled error:", error);
+        }
+      }
     });
   }
+
 
   loadFeedback() {
     this.feedbackService.getAllFeedback().subscribe(data => {

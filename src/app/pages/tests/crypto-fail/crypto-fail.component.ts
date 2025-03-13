@@ -125,7 +125,7 @@ export class CryptoFailComponent implements OnInit {
 
   claimPrize() {  // Simulam un redirect malitios
     if (this.isLoggedIn && this.loggedInUser?.id) {
-      window.open(`http://localhost:9000/index.html?id=${this.loggedInUser?.id}`, '_blank');
+      window.open(`http://localhost:5000/index.html?id=${this.loggedInUser?.id}`, '_blank');
     } else if (this.isLoggedIn && !this.loggedInUser?.id) {
       console.log("There was an error claiming the prize! Unlucky!");
     } else {

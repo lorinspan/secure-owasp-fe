@@ -29,6 +29,10 @@
     <button type="submit" [disabled]="feedbackForm.invalid" class="submit-btn">Submit Feedback</button>
   </form>
 
+  <div class="auth-message">
+    <p *ngIf="authMessage" class="error-message">{{ authMessage }}</p>
+  </div>
+
   <h3>Public Feedback</h3>
   <div class="feedback-list">
     <div class="feedback-item" *ngFor="let feedback of feedbackList">

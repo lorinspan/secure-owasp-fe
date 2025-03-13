@@ -29,6 +29,10 @@ h3 {
   margin-top: 10px;
 }
 
+.auth-message {
+  justify-items: center;
+}
+
 .input-group {
   margin-bottom: 20px;
 }

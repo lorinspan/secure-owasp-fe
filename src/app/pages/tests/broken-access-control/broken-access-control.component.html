@@ -26,7 +26,7 @@
 
     <div class="btn-group">
       <button (click)="logout()" class="btn logout-btn">Logout</button>
-      <button *ngIf="isAdmin()" (click)="loadAdminPanel()" class="btn admin-btn">Access Admin Panel</button>
+      <button *ngIf="isAdmin()" (click)="loadAdminPanel()" id="admin-panel-btn" class="btn admin-btn">Access Admin Panel</button>
     </div>
 
     <div *ngIf="adminPanelAccess" class="admin-panel">
@@ -41,23 +41,24 @@
 
     <div *ngIf="!isAdmin()" class="user-card">
       <div class="input-group">
-        <label>Username</label>
-        <input name="user-username" [(ngModel)]="loggedInUser!.username">
+        <label for="user-username-{{loggedInUser!.id}}">Username</label>
+        <input id="user-username-{{loggedInUser!.id}}" name="user-username" [(ngModel)]="loggedInUser!.username">
       </div>
 
       <div class="input-group">
-        <label>Email</label>
-        <input type="email" name="user-email" [(ngModel)]="loggedInUser!.email">
+        <label for="user-email-{{loggedInUser!.id}}">Email</label>
+        <input id="user-email-{{loggedInUser!.id}}" type="email" name="user-email" [(ngModel)]="loggedInUser!.email">
       </div>
 
       <div class="input-group">
-        <label>Password</label>
-        <input type="password" name="user-password" [(ngModel)]="newPassword">
+        <label for="user-password-{{loggedInUser!.id}}">Password</label>
+        <input id="user-password-{{loggedInUser!.id}}" type="password" name="user-password" [(ngModel)]="newPassword"
+               placeholder="•••••••">
       </div>
 
       <div class="input-group">
-        <label>Role</label>
-        <select name="user-role" [(ngModel)]="loggedInUser!.role"
+        <label for="user-role-{{loggedInUser!.id}}">Role</label>
+        <select id="user-role-{{loggedInUser!.id}}" name="user-role" [(ngModel)]="loggedInUser!.role"
                 [disabled]="!isAdmin() || loggedInUser!.username === loggedInUser!.username">
           <option value="USER">User</option>
           <option value="ADMIN">Admin</option>
@@ -65,36 +66,36 @@
       </div>
 
       <div class="user-actions">
-        <button (click)="updateLoggedUser()" class="btn update-btn">Update</button>
+        <button id="update-user-{{loggedInUser!.id}}" (click)="updateLoggedUser()" class="btn update-btn">Update</button>
       </div>
     </div>
 
     <div class="user-list" *ngIf="isAdmin()">
       <div class="user-card" *ngFor="let user of users">
         <div class="input-group">
-          <label>Id</label>
-          <input name="user-id" disabled [(ngModel)]="user.id">
+          <label for="user-id-{{user.id}}">Id</label>
+          <input id="user-id-{{user.id}}" name="user-id" disabled [(ngModel)]="user.id">
         </div>
 
         <div class="input-group">
-          <label>Username</label>
-          <input name="user-username" [(ngModel)]="user.username">
+          <label for="user-username-{{user.id}}">Username</label>
+          <input id="user-username-{{user.id}}" name="user-username" [(ngModel)]="user.username">
         </div>
 
         <div class="input-group">
-          <label>Password</label>
-          <input type="password" name="user-password" [(ngModel)]="user.password"
-                 placeholder="••••••">
+          <label for="user-password-{{user.id}}">Password</label>
+          <input id="user-password-{{user.id}}" type="password" name="user-password" [(ngModel)]="user.password"
+                 placeholder="•••••••">
         </div>
 
         <div class="input-group">
-          <label>Email</label>
-          <input type="email" name="user-email" [(ngModel)]="user.email">
+          <label for="user-email-{{user.id}}">Email</label>
+          <input id="user-email-{{user.id}}" type="email" name="user-email" [(ngModel)]="user.email">
         </div>
 
         <div class="input-group">
-          <label>Role</label>
-          <select name="user-role" [(ngModel)]="user.role"
+          <label for="user-role-{{user.id}}">Role</label>
+          <select id="user-role-{{user.id}}" name="user-role" [(ngModel)]="user.role"
                   [disabled]="user.username === loggedInUser!.username">
             <option value="USER">User</option>
             <option value="ADMIN">Admin</option>
@@ -102,11 +103,9 @@
         </div>
 
         <div class="admin-actions">
-          <button (click)="updateUser(user)" class="btn admin-update-btn">Update</button>
-          <button
-            (click)="deleteUser(user.id)"
-            class="btn delete-btn"
-            [disabled]="user.id === loggedInUser?.id">
+          <button id="update-user-{{user.id}}" (click)="updateUser(user)" class="btn admin-update-btn">Update</button>
+          <button id="delete-user-{{user.id}}" (click)="deleteUser(user.id)" class="btn delete-btn"
+                  [disabled]="user.id === loggedInUser?.id">
             Delete
           </button>
         </div>
